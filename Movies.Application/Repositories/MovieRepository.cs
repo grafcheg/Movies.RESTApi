@@ -9,12 +9,21 @@ public class MovieRepository : IMovieRepository
     public Task<bool> CreateAsync(Movie movie)
     {
         _movies.Add(movie);
+        
         return Task.FromResult(true);
     }
 
     public Task<Movie?> GetByIdAsync(Guid id)
     {
         var movie = _movies.SingleOrDefault(m => m.Id == id);
+        
+        return Task.FromResult(movie);
+    }
+
+    public Task<Movie?> GetBySlugAsync(string slug)
+    {
+        var movie = _movies.SingleOrDefault(m => m.Slug == slug);
+        
         return Task.FromResult(movie);
     }
 
